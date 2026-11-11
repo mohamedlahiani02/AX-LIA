@@ -64,6 +64,7 @@ export const fr = {
       { img: 'coworking.png', t: 'Espaces' },
       { img: 'presences.png', t: 'Présences' },
       { img: 'paie.png', t: 'Paie' },
+      { img: 'raccourcis.png', t: 'Raccourcis' },
     ],
   },
   universe: {

@@ -65,6 +65,7 @@ export const en: Dict = {
       { img: 'coworking.png', t: 'Spaces' },
       { img: 'presences.png', t: 'Attendance' },
       { img: 'paie.png', t: 'Pay' },
+      { img: 'raccourcis.png', t: 'Shortcuts' },
     ],
   },
   universe: {
