@@ -6,11 +6,11 @@ const contactNote = 'A question about this page? Write to us through the demo fo
 const bricks: Brick[] = [
   { t: 'Training', d: 'Enrol, collect, take attendance, pay trainers. No spreadsheet.', tone: 'indigo' },
   { t: 'Coworking', d: 'Your floor, live. Your clients book on their own.', tone: 'ambre' },
-  { t: 'Café', d: 'The counter joins the same cash register as everything else.', tone: 'ciel' },
+  { t: 'Smart notifications', d: 'The system flags what matters, by priority, with recommendations.', tone: 'ciel' },
   { t: 'Website', d: 'A site that talks to your back office, in two languages.', tone: 'blanc' },
   { t: 'Automations', d: 'Reminders, follow-ups, confirmations. On WhatsApp, Telegram or your own tools.', tone: 'ambre' },
-  { t: 'Chatbot', d: 'It answers your clients while you do something else.', tone: 'indigo' },
-  { t: 'Finance and accounting', d: 'Every dinar tracked, from receipt to closing.', tone: 'blanc' },
+  { t: 'Built-in chatbot', d: 'Ask it how to do things in the platform, or for info on a group.', tone: 'indigo' },
+  { t: 'Cash register and accounting', d: 'Cash handling and closing, for training, coworking or the rest. Every dinar tracked.', tone: 'blanc' },
   { t: 'What next?', d: 'We have more ideas. You probably do too.', tone: 'ciel' },
 ];
 
@@ -45,17 +45,17 @@ export const en: Dict = {
   signature: 'AXÉLIA — Au cœur de votre organisation.',
   meta: {
     title: 'AXÉLIA — All your activities, one system',
-    desc: 'Training, coworking, café, automations, finance: AXÉLIA runs your whole establishment from one place.',
+    desc: 'Training, coworking, cash register, automations, accounting: AXÉLIA runs your whole establishment from one place.',
   },
   nav: { demo: 'Request a demo', skip: 'Skip to content', language: 'Language', back: 'Back to home' },
   hero: {
     pre: 'Run',
-    words: ['your courses', 'your coworking', 'your café', 'your payments', 'your teams'],
+    words: ['your courses', 'your coworking', 'your cash register', 'your payments', 'your teams'],
     post: 'without juggling.',
     sub: 'One platform to run your whole establishment. You switch on what you need, the rest follows.',
     peek: 'See what it looks like',
   },
-  marquee: ['Training', 'Coworking', 'Café', 'Website', 'Automations', 'Chatbot', 'Finance', 'Accounting', 'WhatsApp', 'Telegram', 'And more'],
+  marquee: ['Training', 'Coworking', 'Cash register', 'Website', 'Automations', 'Chatbot', 'Notifications', 'Accounting', 'And more'],
   reel: {
     title: 'It looks like this.',
     sub: 'Real captures, not mock-ups.',
