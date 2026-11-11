@@ -6,7 +6,7 @@
     <title>AXÉLIA — Toutes vos activités, un seul système</title>
     <meta
       name="description"
-      content="AXÉLIA réunit formation, coworking, commerce et pilotage dans une plateforme unique. Chaque établissement active ses modules et paramètre ses règles, sans toucher au code."
+      content="AXÉLIA pilote les centres de formation et les coworkings : groupes, présences, encaissements, paie, réservations. Plateforme configurée selon vos processus, avec accompagnement sur mesure."
     />
     <meta name="theme-color" content="#0e1a36" />
     <link rel="icon" type="image/svg+xml" href="img/axelia-mark.svg" />
@@ -230,6 +230,9 @@
         gap: 40px;
         margin-top: 40px;
       }
+      .steps {
+        grid-template-columns: repeat(4, 1fr);
+      }
       .values p {
         color: var(--slate);
         margin-top: 8px;
@@ -290,9 +293,9 @@
       <div class="wrap">
         <a class="brand" href="#top"><img src="img/axelia-mark.svg" alt="" width="36" height="36" />AXÉLIA</a>
         <nav class="links" aria-label="Sections">
-          <a href="#modules">Modules</a>
-          <a href="#produit">Produit</a>
-          <a href="#engagements">Engagements</a>
+          <a href="#metier">Gestion</a>
+          <a href="#coworking">Coworking</a>
+          <a href="#trajectoire">Trajectoire</a>
         </nav>
         <a class="btn btn-primary" href="#contact">Demander une démonstration</a>
       </div>
@@ -308,7 +311,7 @@
           </p>
           <div class="cta">
             <a class="btn btn-primary" href="#contact">Demander une démonstration</a>
-            <a class="btn btn-ghost" href="#produit">Voir le produit</a>
+            <a class="btn btn-ghost" href="#trajectoire">Notre démarche</a>
           </div>
           <div class="shot">
             <img
@@ -321,115 +324,52 @@
         </div>
       </div>
 
-      <section id="modules">
+      <section id="metier">
         <div class="wrap">
-          <p class="label">Modules</p>
-          <h2>Vous n’activez que ce qui sert.</h2>
-          <p class="intro">Chaque module fonctionne seul et partage les mêmes données : clients, encaissements, caisse, rapports.</p>
-          <div class="modules">
-            <div>
-              <h3>Formation</h3>
-              <p>Inscriptions, groupes, planning, présences, échéanciers et paie des formateurs.</p>
-            </div>
-            <div>
-              <h3>Coworking</h3>
-              <p>Abonnements, packs, réservations de postes et de salles, plan des espaces.</p>
-            </div>
-            <div>
-              <h3>Café</h3>
-              <p>Vente au comptoir, stock, fournisseurs, bons de commande et clôture de caisse.</p>
-            </div>
-            <div>
-              <h3>Site web</h3>
-              <p>Site public de l’établissement, demandes d’inscription et réservation en ligne.</p>
-            </div>
-          </div>
+          <p class="label">Gestion du centre</p>
+          <h2>Vos groupes, vos élèves, vos encaissements : une seule source de vérité.</h2>
+          <p class="intro">De l’inscription à la paie des formateurs, chaque étape de votre activité de formation est tracée et rapprochée.</p>
+<div class="feature"><div><h3>Des groupes qui se remplissent, des séances qui se tiennent</h3><ul><li>Ouverture des groupes par niveau, matière et créneau, avec suivi du taux de remplissage.</li><li>Planning des formateurs et des salles sans double réservation.</li><li>Vision immédiate des groupes rentables et de ceux à consolider.</li></ul></div><img src="img/groupes.png" width="1440" height="900" loading="lazy" alt="Gestion des groupes : effectifs, formateurs et créneaux" /></div>
+<div class="feature rev"><div><h3>Des présences qui pilotent l’assiduité</h3><ul><li>Appel en quelques secondes, à chaque séance.</li><li>Les absences répétées remontent avant qu’un élève ne décroche.</li><li>Les présences alimentent directement la facturation et la paie.</li></ul></div><img src="img/presences.png" width="1440" height="900" loading="lazy" alt="Feuille de présence d’une séance" /></div>
+<div class="feature"><div><h3>Des encaissements suivis au millime</h3><ul><li>Formules adaptées à chaque public : paiement intégral, échéancier, mensualité, séance.</li><li>Relances ciblées des impayés, sans tableur.</li><li>Fond de caisse le matin, clôture le soir : chaque écart est expliqué.</li></ul></div><img src="img/encaissements.png" width="1440" height="900" loading="lazy" alt="Suivi des encaissements et des échéances" /></div>
+<div class="feature rev"><div><h3>Une paie des formateurs sans contestation</h3><ul><li>Rémunération calculée à partir des séances réellement tenues.</li><li>Vos règles : à l’heure, au forfait, à l’élève.</li><li>Chaque montant reste justifiable, séance par séance.</li></ul></div><img src="img/paie.png" width="1440" height="900" loading="lazy" alt="Paie des formateurs" /></div>
         </div>
       </section>
 
-      <section id="produit" class="mist">
+      <section id="coworking" class="mist">
         <div class="wrap">
-          <p class="label">Produit</p>
-          <h2>Un outil pensé pour le guichet, pas pour le manuel.</h2>
-
-          <div class="feature">
-            <div>
-              <h3>Vos raccourcis, dans votre ordre</h3>
-              <ul>
-                <li>12 grandes tuiles pour les gestes du quotidien : encaisser, inscrire, pointer.</li>
-                <li>Chaque utilisateur choisit ses raccourcis et les range comme il veut.</li>
-                <li>Les actions en attente restent visibles sur le tableau de bord.</li>
-              </ul>
-            </div>
-            <img src="img/raccourcis.png" width="1440" height="900" loading="lazy" alt="Écran Mes raccourcis avec douze grandes tuiles d’action" />
-          </div>
-
-          <div class="feature rev">
-            <div>
-              <h3>Une caisse suivie au millime</h3>
-              <ul>
-                <li>Fond de caisse saisi le matin, pour le centre comme pour le café.</li>
-                <li>Clôture quotidienne : attendu, compté, écart.</li>
-                <li>Ticket imprimé ou non, selon l’équipement de l’établissement.</li>
-              </ul>
-            </div>
-            <img src="img/cafe-caisse.png" width="1440" height="900" loading="lazy" alt="Caisse du café : fond de caisse, recettes du jour et clôture" />
-          </div>
-
-          <div class="feature">
-            <div>
-              <h3>Le comptoir en 2 gestes</h3>
-              <ul>
-                <li>Un produit, un mode de paiement : la vente est enregistrée.</li>
-                <li>Le stock se met à jour à chaque ticket.</li>
-                <li>Les recettes du café rejoignent les rapports et le tableau de bord.</li>
-              </ul>
-            </div>
-            <img src="img/cafe.png" width="1440" height="900" loading="lazy" alt="Écran de vente du café avec les produits et le ticket en cours" />
-          </div>
-
-          <div class="feature rev">
-            <div>
-              <h3>Une paie en 3 étapes</h3>
-              <ul>
-                <li>Calculer, vérifier, payer : chaque formateur avance à son rythme.</li>
-                <li>Règles de rémunération paramétrables par établissement.</li>
-                <li>Chaque montant reste traçable jusqu’à la séance.</li>
-              </ul>
-            </div>
-            <img src="img/paie.png" width="1440" height="900" loading="lazy" alt="Écran de paie des formateurs avec les étapes Calculer, Vérifier, Payer" />
-          </div>
+          <p class="label">Coworking</p>
+          <h2>Votre espace, en temps réel.</h2>
+          <p class="intro">Le plan de votre coworking est reproduit poste par poste, salle par salle, avec vos équipes. Chacun voit à l’instant ce qui est libre, réservé ou occupé.</p>
+<div class="feature"><div><h3>Le plan de votre espace, cartographié avec vos équipes</h3><ul><li>Postes, bureaux fermés et salles de réunion dessinés à l’identique.</li><li>Occupation en direct, réservations et demandes en attente au même endroit.</li><li>Taux d’occupation par espace pour ajuster vos offres et vos tarifs.</li></ul></div><img src="img/coworking.png" width="1440" height="900" loading="lazy" alt="Plan en direct du coworking : postes, salles de réunion et bureaux" /></div>
         </div>
       </section>
 
-      <section id="engagements">
+      <section id="conseil">
         <div class="wrap">
-          <p class="label">Engagements</p>
-          <h2>Structurer, sans alourdir.</h2>
-          <div class="values">
-            <div>
-              <div class="dot"></div>
-              <h3>Intelligence</h3>
-              <p>Données et processus organisés, un tableau de bord central.</p>
-            </div>
-            <div>
-              <div class="dot"></div>
-              <h3>Maîtrise</h3>
-              <p>Caisses, encaissements et clôtures suivis au millime.</p>
-            </div>
-            <div>
-              <div class="dot"></div>
-              <h3>Modularité</h3>
-              <p>N’activez que l’utile ; la plateforme évolue avec vous.</p>
-            </div>
+          <p class="label">Conseil sur mesure</p>
+          <h2>Une plateforme configurée selon vos processus, pas l’inverse.</h2>
+          <p class="intro">Vos tarifs, vos règles de paie, vos circuits de validation et vos rôles sont paramétrés par nos consultants. Vous gardez votre façon de travailler ; nous la rendons fiable et mesurable.</p>
+        </div>
+      </section>
+
+      <section id="trajectoire" class="mist">
+        <div class="wrap">
+          <p class="label">Trajectoire</p>
+          <h2>Nous venons chez vous avant d’installer quoi que ce soit.</h2>
+          <div class="values steps">
+            <div><div class="dot"></div><h3>1. Immersion</h3><p>1 à 2 semaines sur place, au contact de votre accueil, de vos formateurs et de votre direction.</p></div>
+            <div><div class="dot"></div><h3>2. Cartographie</h3><p>Vos processus métier sont décrits et validés avec vous : inscriptions, encaissements, paie, réservations.</p></div>
+            <div><div class="dot"></div><h3>3. Mise en œuvre</h3><p>La plateforme est paramétrée selon ces processus, vos données sont reprises.</p></div>
+            <div><div class="dot"></div><h3>4. Formation</h3><p>Chaque équipe est formée sur ses propres cas, puis accompagnée au démarrage.</p></div>
           </div>
         </div>
       </section>
 
       <section id="contact" class="close">
         <div class="wrap">
-          <h2>Voyez AXÉLIA sur vos propres cas.</h2>
-          <p>Une démonstration de 30 minutes, avec vos activités et vos règles de gestion.</p>
+          <h2>Parlons de votre centre.</h2>
+          <p>Un premier échange de 30 minutes pour comprendre votre activité et vos priorités.</p>
           <a class="btn btn-primary" id="contact-link" href="mailto:CONTACT_EMAIL?subject=D%C3%A9monstration%20AX%C3%89LIA">Demander une démonstration</a>
         </div>
       </section>
