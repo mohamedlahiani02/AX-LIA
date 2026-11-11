@@ -51,7 +51,7 @@ export const en: Dict = {
   hero: {
     pre: 'Run',
     words: ['your courses', 'your coworking', 'your cash register', 'your payments', 'your teams'],
-    post: 'without juggling.',
+    post: 'without the headache.',
     sub: 'One platform to run your whole establishment. You switch on what you need, the rest follows.',
     peek: 'See what it looks like',
   },

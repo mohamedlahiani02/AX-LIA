@@ -50,7 +50,7 @@ export const fr = {
   hero: {
     pre: 'Gérez',
     words: ['vos formations', 'votre coworking', 'votre caisse', 'vos encaissements', 'vos équipes'],
-    post: 'sans jongler.',
+    post: 'sans prise de tête.',
     sub: 'Une seule plateforme pour faire tourner tout votre établissement. Vous activez ce qu’il vous faut, le reste suit.',
     peek: 'Voir à quoi ça ressemble',
   },
