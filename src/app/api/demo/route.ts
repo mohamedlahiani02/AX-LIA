@@ -66,5 +66,29 @@ export async function POST(request: Request): Promise<NextResponse> {
     console.error('Demo email delivery failed.', error);
     return NextResponse.json({ error: 'delivery_failed' }, { status: 502 });
   }
+  // The request is already delivered to the team. A confirmation failure must
+  // not invite a resubmission that would duplicate the team's notification.
+  try {
+    const english = payload.locale === 'en';
+    const confirmation = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+      signal: AbortSignal.timeout(10000),
+      body: JSON.stringify({
+        from,
+        to: [payload.email],
+        reply_to: to,
+        subject: english ? 'AXELIA - Demo request received' : 'AXELIA - Demande de démonstration reçue',
+        text: english
+          ? 'Hello,\n\nThank you for requesting an AXELIA demo. We have received your request and our team will contact you to arrange it.\n\nIf you have a question, reply to this email.\n\nThe AXELIA team'
+          : 'Bonjour,\n\nMerci pour votre demande de démonstration AXELIA. Nous avons bien reçu votre demande et notre équipe vous contactera pour l’organiser.\n\nPour toute question, répondez à cet e-mail.\n\nL’équipe AXELIA',
+      }),
+    });
+    if (!confirmation.ok) {
+      console.error(`Demo confirmation email failed with status ${confirmation.status}.`);
+    }
+  } catch {
+    console.error('Demo confirmation email delivery failed.');
+  }
   return NextResponse.json({ ok: true });
 }
