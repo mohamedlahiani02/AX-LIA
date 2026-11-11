@@ -12,8 +12,7 @@ export default function NotFound() {
         return (
           <div key={locale} lang={locale}>
             <h1>{text.title}</h1>
-            <p className="lead">{text.lead}</p>
-            <Link href={href(locale, 'home')} className="more">
+            <Link href={href(locale, 'home')} className="peek">
               {text.back}
             </Link>
           </div>

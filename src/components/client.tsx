@@ -1,115 +1,95 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
-import type { ModuleInfo, ModuleKey } from '@/lib/site';
+import Image from 'next/image';
+import { useEffect, useState, type FormEvent, type PointerEvent, type ReactNode } from 'react';
 
-type ModuleMapProps = {
-  modules: (ModuleInfo & { count: string; link: string })[];
-  hereLabel: string;
-  moreLabel: string;
-};
+const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
 
-export function ModuleMap({ modules, hereLabel, moreLabel }: ModuleMapProps) {
-  const [active, setActive] = useState<ModuleKey>(modules[0].key);
-  const current = modules.find((module) => module.key === active) ?? modules[0];
+export function RotatingWord({ words }: { words: string[] }) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia(reducedMotionQuery).matches) return;
+    const timer = window.setInterval(() => setIndex((current) => (current + 1) % words.length), 2200);
+    return () => window.clearInterval(timer);
+  }, [words.length]);
   return (
-    <div className="map">
-      <div className="map-tabs" role="tablist">
-        {modules.map((module) => {
-          const selected = module.key === active;
-          return (
-            <button
-              key={module.key}
-              type="button"
-              role="tab"
-              id={`tab-${module.key}`}
-              aria-selected={selected}
-              aria-controls="map-panel"
-              className="map-tab"
-              onMouseEnter={() => setActive(module.key)}
-              onFocus={() => setActive(module.key)}
-              onClick={() => setActive(module.key)}
-            >
-              <strong>
-                {selected && <span className="dot" title={hereLabel} />}
-                {module.name}
-              </strong>
-              <span>{module.count}</span>
-            </button>
-          );
-        })}
-      </div>
-      <div className="map-panel" role="tabpanel" id="map-panel" aria-labelledby={`tab-${current.key}`}>
-        <p>{current.tag}</p>
-        <ul>
-          {current.blocks.map((block) => (
-            <li key={block}>{block}</li>
-          ))}
-        </ul>
-        <a className="more" href={current.link}>
-          {moreLabel}
-        </a>
-      </div>
+    <span className="rotor">
+      <span key={index} className="rotor-word">
+        {words[index]}
+      </span>
+    </span>
+  );
+}
+
+type PointerZoneProps = { className: string; tilt?: boolean; children: ReactNode };
+
+export function PointerZone({ className, tilt = false, children }: PointerZoneProps) {
+  function onMove(event: PointerEvent<HTMLDivElement>) {
+    const element = event.currentTarget;
+    const box = element.getBoundingClientRect();
+    const x = event.clientX - box.left;
+    const y = event.clientY - box.top;
+    element.style.setProperty('--mx', `${x}px`);
+    element.style.setProperty('--my', `${y}px`);
+    if (tilt) {
+      element.style.setProperty('--ry', `${(x / box.width - 0.5) * 10}deg`);
+      element.style.setProperty('--rx', `${(0.5 - y / box.height) * 10}deg`);
+    }
+  }
+  function onLeave(event: PointerEvent<HTMLDivElement>) {
+    event.currentTarget.style.setProperty('--rx', '0deg');
+    event.currentTarget.style.setProperty('--ry', '0deg');
+  }
+  return (
+    <div className={className} onPointerMove={onMove} onPointerLeave={tilt ? onLeave : undefined}>
+      {children}
     </div>
   );
 }
 
-type SwitchProps = {
-  withoutLabel: string;
-  withLabel: string;
-  rows: { t: string; without: string; with: string }[];
-};
-
-export function SwitchPanel({ withoutLabel, withLabel, rows }: SwitchProps) {
-  const [on, setOn] = useState(true);
+export function Reel({ tabs }: { tabs: { img: string; t: string }[] }) {
+  const [index, setIndex] = useState(0);
+  const next = () => setIndex((current) => (current + 1) % tabs.length);
   return (
-    <div className="switch">
-      <div className="toggle" role="group">
-        <button type="button" aria-pressed={!on} onClick={() => setOn(false)}>
-          {withoutLabel}
-        </button>
-        <button type="button" aria-pressed={on} onClick={() => setOn(true)}>
-          {withLabel}
-        </button>
-      </div>
-      <dl className={on ? 'switch-rows is-on' : 'switch-rows'} aria-live="polite">
-        {rows.map((row) => (
-          <div key={row.t}>
-            <dt>{row.t}</dt>
-            <dd>{on ? row.with : row.without}</dd>
-          </div>
+    <div className="reel">
+      <div className="reel-tabs" role="tablist">
+        {tabs.map((tab, position) => (
+          <button
+            key={tab.img}
+            type="button"
+            role="tab"
+            aria-selected={position === index}
+            className="reel-tab"
+            onClick={() => setIndex(position)}
+          >
+            {tab.t}
+            {position === index && <span key={index} className="reel-progress" onAnimationEnd={next} />}
+          </button>
         ))}
-      </dl>
-    </div>
-  );
-}
-
-type BillingProps = {
-  label: string;
-  monthlyLabel: string;
-  annualLabel: string;
-  title: string;
-  monthly: string;
-  annual: string;
-  quote: string;
-};
-
-export function HostingCard({ label, monthlyLabel, annualLabel, title, monthly, annual, quote }: BillingProps) {
-  const [isAnnual, setIsAnnual] = useState(false);
-  return (
-    <article className="card">
-      <h3>{title}</h3>
-      <p className="price">{quote}</p>
-      <div className="toggle" role="group" aria-label={label}>
-        <button type="button" aria-pressed={!isAnnual} onClick={() => setIsAnnual(false)}>
-          {monthlyLabel}
-        </button>
-        <button type="button" aria-pressed={isAnnual} onClick={() => setIsAnnual(true)}>
-          {annualLabel}
-        </button>
       </div>
-      <p aria-live="polite">{isAnnual ? annual : monthly}</p>
-    </article>
+      <div className="reel-screen">
+        <div className="reel-bar">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="reel-stage">
+          {tabs.map((tab, position) => (
+            <Image
+              key={tab.img}
+              src={`/img/${tab.img}`}
+              alt={position === index ? `${tab.t} — AXÉLIA` : ''}
+              aria-hidden={position !== index}
+              width={1440}
+              height={900}
+              sizes="(max-width: 1000px) 100vw, 1000px"
+              priority={position === 0}
+              className={position === index ? 'is-active' : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
