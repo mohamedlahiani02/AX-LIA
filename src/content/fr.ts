@@ -5,11 +5,11 @@ const contactNote = 'Une question sur cette page ? Écrivez-nous via le formulai
 const bricks: Brick[] = [
   { t: 'Formation', d: 'Inscrire, encaisser, faire l’appel, payer les intervenants. Sans tableur.', tone: 'indigo' },
   { t: 'Coworking', d: 'Votre étage en direct. Vos clients réservent tout seuls.', tone: 'ambre' },
-  { t: 'Café', d: 'Le comptoir rejoint la même caisse que tout le reste.', tone: 'ciel' },
+  { t: 'Notifications intelligentes', d: 'Le système vous signale ce qui compte, par priorité, avec des recommandations.', tone: 'ciel' },
   { t: 'Site web', d: 'Un site qui parle à votre back-office, dans deux langues.', tone: 'blanc' },
   { t: 'Automatisations', d: 'Rappels, relances, confirmations. Sur WhatsApp, Telegram ou vos propres outils.', tone: 'ambre' },
-  { t: 'Chatbot', d: 'Il répond à vos clients pendant que vous faites autre chose.', tone: 'indigo' },
-  { t: 'Finance et comptabilité', d: 'Chaque dinar suivi, du reçu à la clôture.', tone: 'blanc' },
+  { t: 'Chatbot intégré', d: 'Demandez-lui comment faire dans la plateforme, ou une info sur un groupe.', tone: 'indigo' },
+  { t: 'Caisse et comptabilité', d: 'Gestion et clôture de caisse, formation, coworking ou le reste. Chaque dinar suivi.', tone: 'blanc' },
   { t: 'Et ensuite ?', d: 'On a d’autres idées. Vous aussi, sûrement.', tone: 'ciel' },
 ];
 
@@ -44,17 +44,17 @@ export const fr = {
   signature: 'AXÉLIA — Au cœur de votre organisation.',
   meta: {
     title: 'AXÉLIA — Toutes vos activités, un seul système',
-    desc: 'Formation, coworking, café, automatisations, finance : AXÉLIA fait tourner tout votre établissement depuis un seul endroit.',
+    desc: 'Formation, coworking, caisse, automatisations, comptabilité : AXÉLIA fait tourner tout votre établissement depuis un seul endroit.',
   },
   nav: { demo: 'Demander une démo', skip: 'Aller au contenu', language: 'Langue', back: 'Retour à l’accueil' },
   hero: {
     pre: 'Gérez',
-    words: ['vos formations', 'votre coworking', 'votre café', 'vos encaissements', 'vos équipes'],
-    post: 'sans jongler.',
+    words: ['vos formations', 'votre coworking', 'votre caisse', 'vos encaissements', 'vos équipes'],
+    post: 'sans prise de tête.',
     sub: 'Une seule plateforme pour faire tourner tout votre établissement. Vous activez ce qu’il vous faut, le reste suit.',
     peek: 'Voir à quoi ça ressemble',
   },
-  marquee: ['Formation', 'Coworking', 'Café', 'Site web', 'Automatisations', 'Chatbot', 'Finance', 'Comptabilité', 'WhatsApp', 'Telegram', 'Et la suite'],
+  marquee: ['Formation', 'Coworking', 'Caisse', 'Site web', 'Automatisations', 'Chatbot', 'Notifications', 'Comptabilité', 'Et la suite'],
   reel: {
     title: 'Ça ressemble à ça.',
     sub: 'De vraies captures, pas des maquettes.',
