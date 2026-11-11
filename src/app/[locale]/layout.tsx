@@ -5,7 +5,7 @@ import { defaultLocale, isLocale, locales, siteUrl } from '@/lib/site';
 import '../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const manrope = Manrope({ subsets: ['latin'], weight: ['600', '700'], variable: '--font-manrope', display: 'swap' });
+const manrope = Manrope({ subsets: ['latin'], weight: ['600', '800'], variable: '--font-manrope', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
