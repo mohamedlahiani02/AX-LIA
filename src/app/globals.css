@@ -593,6 +593,7 @@ img {
 
 .field {
   display: grid;
+  min-width: 0;
   gap: 6px;
 }
 
@@ -601,7 +602,10 @@ img {
   font-size: 14px;
 }
 
-.field input {
+.field input,
+.field textarea {
+  width: 100%;
+  min-width: 0;
   min-height: 50px;
   padding: 0 16px;
   border: 2px solid #e3e6ee;
@@ -612,11 +616,13 @@ img {
   transition: border-color var(--ease), background var(--ease), transform var(--ease);
 }
 
-.field input:hover {
+.field input:hover,
+.field textarea:hover {
   border-color: var(--ciel);
 }
 
-.field input:focus {
+.field input:focus,
+.field textarea:focus {
   outline: 0;
   border-color: var(--indigo);
   background: var(--blanc);
@@ -729,7 +735,32 @@ img {
   }
 }
 
+.field textarea {
+  padding: 12px 16px;
+  resize: vertical;
+}
+
+.form {
+  min-width: 0;
+}
+
 @media (max-width: 520px) {
+  .cta-grid {
+    width: 100%;
+    padding: 32px 16px;
+    border-radius: 0;
+    gap: 28px;
+  }
+
+  .cta .card {
+    padding: 20px;
+  }
+
+  .field input,
+  .field textarea {
+    font-size: 16px;
+  }
+
   .bricks {
     grid-template-columns: minmax(0, 1fr);
   }

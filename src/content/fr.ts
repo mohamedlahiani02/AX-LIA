@@ -74,7 +74,7 @@ export const fr = {
   },
   cta: { title: 'Curieux ?', sub: 'Trente minutes, sur vos cas réels. On vous montre, vous décidez.' },
   demo: {
-    fields: { name: 'Nom', establishment: 'Établissement', email: 'E-mail', phone: 'Téléphone' },
+    fields: { name: 'Nom', establishment: 'Établissement', email: 'E-mail', phone: 'Téléphone', message: 'Message ou question (facultatif)' },
     submit: 'Demander une démo',
     sending: 'Envoi en cours',
     required: 'Ce champ est requis.',

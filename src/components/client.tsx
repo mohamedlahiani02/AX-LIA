@@ -94,10 +94,11 @@ export function Reel({ tabs }: { tabs: { img: string; t: string }[] }) {
 }
 
 type FieldName = 'name' | 'establishment' | 'email' | 'phone';
+type FormLabels = Record<FieldName | 'message', string>;
 
 type DemoFormProps = {
   locale: string;
-  labels: Record<FieldName, string>;
+  labels: FormLabels;
   text: { submit: string; sending: string; required: string; invalidEmail: string; success: string; prepare: string; failure: string };
 };
 
@@ -124,6 +125,7 @@ export function DemoForm({ locale, labels, text }: DemoFormProps) {
       if (!values[name]) found[name] = text.required;
     }
     if (values.email && !emailPattern.test(values.email)) found.email = text.invalidEmail;
+    const message = String(data.get('message') ?? '').trim();
     setErrors(found);
     if (Object.keys(found).length > 0) return;
 
@@ -132,7 +134,7 @@ export function DemoForm({ locale, labels, text }: DemoFormProps) {
       const response = await fetch('/api/demo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, locale }),
+        body: JSON.stringify({ ...values, message, locale }),
       });
       setStatus(response.ok ? 'sent' : 'failed');
     } catch {
@@ -170,6 +172,10 @@ export function DemoForm({ locale, labels, text }: DemoFormProps) {
           )}
         </div>
       ))}
+      <div className="field">
+        <label htmlFor="demo-message">{labels.message}</label>
+        <textarea id="demo-message" name="message" rows={4} maxLength={2000} />
+      </div>
       <button type="submit" className="btn" disabled={status === 'sending'}>
         {status === 'sending' ? text.sending : text.submit}
       </button>
