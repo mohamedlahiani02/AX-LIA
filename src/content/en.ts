@@ -75,7 +75,7 @@ export const en: Dict = {
   },
   cta: { title: 'Curious?', sub: 'Thirty minutes, on your real cases. We show you, you decide.' },
   demo: {
-    fields: { name: 'Name', establishment: 'Establishment', email: 'Email', phone: 'Phone' },
+    fields: { name: 'Name', establishment: 'Establishment', email: 'Email', phone: 'Phone', message: 'Message or question (optional)' },
     submit: 'Request a demo',
     sending: 'Sending',
     required: 'This field is required.',

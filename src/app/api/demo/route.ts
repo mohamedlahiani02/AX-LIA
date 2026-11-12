@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 const fields = ['name', 'establishment', 'email', 'phone'] as const;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const maxLength = 200;
+const maxMessageLength = 2000;
 
 export async function POST(request: Request): Promise<NextResponse> {
   const apiKey = process.env.RESEND_API_KEY;
@@ -35,6 +36,11 @@ export async function POST(request: Request): Promise<NextResponse> {
   if (!emailPattern.test(payload.email)) {
     return NextResponse.json({ error: 'invalid_field', field: 'email' }, { status: 422 });
   }
+  const message = typeof body.message === 'string' ? body.message.trim() : '';
+  if (message.length > maxMessageLength) {
+    return NextResponse.json({ error: 'invalid_field', field: 'message' }, { status: 422 });
+  }
+  payload.message = message;
   payload.locale = body.locale === 'en' ? 'en' : 'fr';
   payload.receivedAt = new Date().toISOString();
 
@@ -53,6 +59,7 @@ export async function POST(request: Request): Promise<NextResponse> {
           `Establishment: ${payload.establishment}`,
           `Email: ${payload.email}`,
           `Phone: ${payload.phone}`,
+          `Message: ${payload.message || '-'}`,
           `Language: ${payload.locale}`,
           `Received: ${payload.receivedAt}`,
         ].join('\n'),
@@ -78,10 +85,10 @@ export async function POST(request: Request): Promise<NextResponse> {
         from,
         to: [payload.email],
         reply_to: to,
-        subject: english ? 'AXELIA - Demo request received' : 'AXELIA - Demande de démonstration reçue',
+        subject: english ? 'AXELIA - Demo request received' : 'AXELIA - Demande de dÃ©monstration reÃ§ue',
         text: english
           ? 'Hello,\n\nThank you for requesting an AXELIA demo. We have received your request and our team will contact you to arrange it.\n\nIf you have a question, reply to this email.\n\nThe AXELIA team'
-          : 'Bonjour,\n\nMerci pour votre demande de démonstration AXELIA. Nous avons bien reçu votre demande et notre équipe vous contactera pour l’organiser.\n\nPour toute question, répondez à cet e-mail.\n\nL’équipe AXELIA',
+          : 'Bonjour,\n\nMerci pour votre demande de dÃ©monstration AXELIA. Nous avons bien reÃ§u votre demande et notre Ã©quipe vous contactera pour lâ€™organiser.\n\nPour toute question, rÃ©pondez Ã  cet e-mail.\n\nLâ€™Ã©quipe AXELIA',
       }),
     });
     if (!confirmation.ok) {
