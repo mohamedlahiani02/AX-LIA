@@ -8,7 +8,7 @@ type Base = { locale: Locale; dict: Dict };
 export function Logo({ locale }: { locale: Locale }) {
   return (
     <Link href={href(locale, 'home')} className="logo" aria-label="AXÉLIA">
-      <Image src="/img/axelia-mark.svg" alt="" width={32} height={32} priority />
+      <Image src="/img/axelia-logo.png" alt="" width={36} height={36} priority />
       <span>AXÉLIA</span>
     </Link>
   );
