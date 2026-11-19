@@ -93,6 +93,33 @@ export function Reel({ tabs }: { tabs: { img: string; t: string }[] }) {
   );
 }
 
+export function StickyCta({ label }: { label: string }) {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const hero = document.querySelector('.hero');
+    const demo = document.getElementById('demo');
+    if (!hero || !demo) return;
+    const state = { pastHero: false, atDemo: false };
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === hero) state.pastHero = !entry.isIntersecting;
+        if (entry.target === demo) state.atDemo = entry.isIntersecting;
+      }
+      setVisible(state.pastHero && !state.atDemo);
+    });
+    observer.observe(hero);
+    observer.observe(demo);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <div className={visible ? 'sticky-cta is-visible' : 'sticky-cta'} aria-hidden={!visible}>
+      <a href="#demo" className="btn" tabIndex={visible ? 0 : -1}>
+        {label}
+      </a>
+    </div>
+  );
+}
+
 type FieldName = 'name' | 'establishment' | 'email' | 'phone';
 type FormLabels = Record<FieldName | 'message', string>;
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { DemoForm, PointerZone, Reel, RotatingWord } from '@/components/client';
+import { DemoForm, PointerZone, Reel, RotatingWord, StickyCta } from '@/components/client';
 import { Footer, Header } from '@/components/ui';
 import { getDict } from '@/content';
 import type { Dict } from '@/content/fr';
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 function Home({ locale, dict }: ViewProps) {
-  const { hero, reel, universe, approach, cta, demo } = dict;
+  const { hero, benefits, midCta, reel, universe, approach, faq, cta, demo } = dict;
   const marquee = [...dict.marquee, ...dict.marquee];
   return (
     <>
@@ -61,13 +61,18 @@ function Home({ locale, dict }: ViewProps) {
           </h1>
           <p className="lead">{hero.sub}</p>
           <div className="actions">
-            <a href="#demo" className="btn">
-              {dict.nav.demo}
+            <a href="#demo" className="btn btn-big">
+              {hero.cta}
             </a>
             <a href="#reel" className="peek">
               {hero.peek}
             </a>
           </div>
+          <ul className="reassure">
+            {hero.reassure.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </div>
       </PointerZone>
 
@@ -79,11 +84,29 @@ function Home({ locale, dict }: ViewProps) {
         </div>
       </div>
 
+      <section className="benefits wrap" aria-label={hero.cta}>
+        {benefits.map((benefit) => (
+          <div key={benefit.t} className="benefit">
+            <h3>{benefit.t}</h3>
+            <p>{benefit.d}</p>
+          </div>
+        ))}
+      </section>
+
       <section className="section" id="reel">
         <div className="wrap">
           <h2>{reel.title}</h2>
           <p className="lead">{reel.sub}</p>
           <Reel tabs={reel.tabs} />
+          <div className="mid-cta">
+            <div>
+              <h3>{midCta.title}</h3>
+              <p>{midCta.sub}</p>
+            </div>
+            <a href="#demo" className="btn">
+              {hero.cta}
+            </a>
+          </div>
         </div>
       </section>
 
@@ -122,11 +145,30 @@ function Home({ locale, dict }: ViewProps) {
         </div>
       </section>
 
+      <section className="section faq">
+        <div className="wrap">
+          <h2>{faq.title}</h2>
+          <div className="faq-list">
+            {faq.items.map((item) => (
+              <details key={item.q} className="faq-item">
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section cta" id="demo">
         <div className="wrap cta-grid">
           <div>
             <h2>{cta.title}</h2>
             <p className="lead">{cta.sub}</p>
+            <ul className="cta-points">
+              {cta.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
             {contactEmail && (
               <p className="contact">
                 {demo.contactLine} <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
@@ -148,6 +190,8 @@ function Home({ locale, dict }: ViewProps) {
           />
         </div>
       </section>
+
+      <StickyCta label={hero.cta} />
     </>
   );
 }
