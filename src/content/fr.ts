@@ -72,6 +72,17 @@ export const fr = {
     sub: 'Passez sur une brique pour un aperçu. Le reste, on vous le montre.',
     bricks,
   },
+  approach: {
+    title: 'Pas de pack. Votre plateforme.',
+    sub: 'Chaque établissement a ses règles. On les comprend avant de chiffrer quoi que ce soit.',
+    steps: [
+      { t: 'On vous écoute', d: 'Un premier échange avec la direction : vos activités, vos priorités, ce qui vous fait perdre du temps.' },
+      { t: 'On vient sur place', d: 'Nos consultants observent l’accueil, l’encaissement, l’appel, le planning. Le terrain, pas la théorie.' },
+      { t: 'On cartographie vos règles', d: 'Tarifs, échéanciers, paie, validations, rôles : tout est décrit et validé avec vous.' },
+      { t: 'On revient avec votre offre', d: 'Une proposition sur mesure : la mise en place, l’exploitation, et rien que ce dont vous avez besoin.' },
+    ],
+    cta: 'Parler à un consultant',
+  },
   cta: { title: 'Curieux ?', sub: 'Trente minutes, sur vos cas réels. On vous montre, vous décidez.' },
   demo: {
     fields: { name: 'Nom', establishment: 'Établissement', email: 'E-mail', phone: 'Téléphone', message: 'Message ou question (facultatif)' },

@@ -546,6 +546,64 @@ img {
   }
 }
 
+.path {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.path-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: 60px;
+  width: calc(100% - 44px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--indigo), var(--ambre));
+  opacity: 0.5;
+}
+
+.path-step {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 0 4px;
+}
+
+.path-num {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--indigo);
+  border-radius: 50%;
+  background: var(--nuit);
+  font: 800 18px/1 var(--font-head);
+  transition: transform 400ms cubic-bezier(0.3, 1.6, 0.5, 1), background var(--ease), border-color var(--ease), color var(--ease);
+}
+
+.path-step:hover .path-num {
+  transform: scale(1.15) rotate(-8deg);
+  background: var(--ambre);
+  border-color: var(--ambre);
+  color: var(--nuit);
+}
+
+.path-step p {
+  color: var(--soft);
+  font-size: 16px;
+}
+
+.path-cta {
+  margin-top: 48px;
+}
+
 .cta {
   padding-top: 0;
 }
@@ -709,6 +767,7 @@ img {
 
 @supports (animation-timeline: view()) {
   .section h2,
+  .path-step,
   .reel,
   .brick,
   .cta-grid {
@@ -726,6 +785,33 @@ img {
 }
 
 @media (max-width: 900px) {
+  .path {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .path-step:not(:last-child)::after {
+    top: 60px;
+    left: 31px;
+    width: 2px;
+    height: calc(100% - 28px);
+    background: linear-gradient(180deg, var(--indigo), var(--ambre));
+  }
+
+  .path-step {
+    grid-template-columns: 56px minmax(0, 1fr);
+    column-gap: 18px;
+  }
+
+  .path-step h3,
+  .path-step p {
+    grid-column: 2;
+  }
+
+  .path-num {
+    grid-row: 1 / span 2;
+  }
+
   .bricks {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
