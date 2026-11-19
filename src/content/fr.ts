@@ -65,15 +65,16 @@ export const fr = {
   midCta: { title: 'Et sur vos propres données ?', sub: 'On vous le montre avec vos cas réels, pas une démo générique.' },
   reel: {
     title: 'Ça ressemble à ça.',
-    sub: 'De vraies captures, pas des maquettes.',
-    tabs: [
-      { img: 'dashboard.png', t: 'Pilotage' },
-      { img: 'encaissements.png', t: 'Encaissements' },
-      { img: 'coworking.png', t: 'Espaces' },
-      { img: 'presences.png', t: 'Présences' },
-      { img: 'paie.png', t: 'Paie' },
-      { img: 'raccourcis.png', t: 'Raccourcis' },
-    ],
+    sub: 'Une minute pour voir AXÉLIA en action.',
+    video: {
+      play: 'Lire la vidéo',
+      pause: 'Mettre en pause',
+      soundOn: 'Activer le son',
+      soundOff: 'Couper le son',
+      fullscreen: 'Plein écran',
+      seek: 'Position dans la vidéo',
+      label: 'Vidéo de présentation d’AXÉLIA',
+    },
   },
   universe: {
     title: 'Un système. Autant de briques que d’activités.',

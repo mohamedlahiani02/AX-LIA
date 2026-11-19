@@ -66,15 +66,16 @@ export const en: Dict = {
   midCta: { title: 'What about your own data?', sub: 'We show you with your real cases, not a generic demo.' },
   reel: {
     title: 'It looks like this.',
-    sub: 'Real captures, not mock-ups.',
-    tabs: [
-      { img: 'dashboard.png', t: 'Overview' },
-      { img: 'encaissements.png', t: 'Payments' },
-      { img: 'coworking.png', t: 'Spaces' },
-      { img: 'presences.png', t: 'Attendance' },
-      { img: 'paie.png', t: 'Pay' },
-      { img: 'raccourcis.png', t: 'Shortcuts' },
-    ],
+    sub: 'One minute to see AXÉLIA in action.',
+    video: {
+      play: 'Play video',
+      pause: 'Pause',
+      soundOn: 'Turn sound on',
+      soundOff: 'Mute',
+      fullscreen: 'Full screen',
+      seek: 'Video position',
+      label: 'AXÉLIA presentation video',
+    },
   },
   universe: {
     title: 'One system. As many bricks as you have activities.',
