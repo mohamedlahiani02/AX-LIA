@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { DemoForm, PointerZone, Reel, RotatingWord, StickyCta } from '@/components/client';
+import { DemoForm, PointerZone, RotatingWord, StickyCta, VideoShowcase } from '@/components/client';
 import { Footer, Header } from '@/components/ui';
 import { getDict } from '@/content';
 import type { Dict } from '@/content/fr';
@@ -97,7 +97,7 @@ function Home({ locale, dict }: ViewProps) {
         <div className="wrap">
           <h2>{reel.title}</h2>
           <p className="lead">{reel.sub}</p>
-          <Reel tabs={reel.tabs} />
+          <VideoShowcase src="/video/axelia-demo.mp4" poster="/video/axelia-demo-poster.jpg" labels={reel.video} />
           <div className="mid-cta">
             <div>
               <h3>{midCta.title}</h3>

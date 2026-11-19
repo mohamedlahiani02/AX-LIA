@@ -1,7 +1,6 @@
 'use client';
 
-import Image from 'next/image';
-import { useEffect, useState, type FormEvent, type PointerEvent, type ReactNode } from 'react';
+import { type CSSProperties, type ChangeEvent, type FormEvent, type PointerEvent, type ReactNode, useEffect, useRef, useState } from 'react';
 
 const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
 
@@ -47,46 +46,141 @@ export function PointerZone({ className, tilt = false, children }: PointerZonePr
   );
 }
 
-export function Reel({ tabs }: { tabs: { img: string; t: string }[] }) {
-  const [index, setIndex] = useState(0);
-  const next = () => setIndex((current) => (current + 1) % tabs.length);
+type VideoLabels = { play: string; pause: string; soundOn: string; soundOff: string; fullscreen: string; seek: string; label: string };
+
+function formatTime(seconds: number): string {
+  const safe = Number.isFinite(seconds) ? Math.max(0, Math.floor(seconds)) : 0;
+  return `${Math.floor(safe / 60)}:${String(safe % 60).padStart(2, '0')}`;
+}
+
+export function VideoShowcase({ src, poster, labels }: { src: string; poster: string; labels: VideoLabels }) {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const pausedByUser = useRef(false);
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const [time, setTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || window.matchMedia(reducedMotionQuery).matches) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !pausedByUser.current) {
+          video.play().catch(() => setPlaying(false));
+        } else if (!entry.isIntersecting) {
+          video.pause();
+        }
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  function togglePlay() {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      pausedByUser.current = false;
+      video.play().catch(() => setPlaying(false));
+    } else {
+      pausedByUser.current = true;
+      video.pause();
+    }
+  }
+
+  function toggleSound() {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
+    if (!video.muted && video.paused) {
+      pausedByUser.current = false;
+      video.play().catch(() => setPlaying(false));
+    }
+  }
+
+  function seek(event: ChangeEvent<HTMLInputElement>) {
+    const video = videoRef.current;
+    if (!video) return;
+    video.currentTime = Number(event.target.value);
+    setTime(video.currentTime);
+  }
+
+  function fullscreen() {
+    const frame = frameRef.current;
+    if (!frame) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => undefined);
+    } else if (frame.requestFullscreen) {
+      frame.requestFullscreen().catch(() => undefined);
+    }
+  }
+
+  const progress = duration > 0 ? (time / duration) * 100 : 0;
   return (
-    <div className="reel">
-      <div className="reel-tabs" role="tablist">
-        {tabs.map((tab, position) => (
-          <button
-            key={tab.img}
-            type="button"
-            role="tab"
-            aria-selected={position === index}
-            className="reel-tab"
-            onClick={() => setIndex(position)}
-          >
-            {tab.t}
-            {position === index && <span key={index} className="reel-progress" onAnimationEnd={next} />}
-          </button>
-        ))}
-      </div>
+    <div className="reel" ref={frameRef}>
       <div className="reel-screen">
         <div className="reel-bar">
           <span />
           <span />
           <span />
         </div>
-        <div className="reel-stage">
-          {tabs.map((tab, position) => (
-            <Image
-              key={tab.img}
-              src={`/img/${tab.img}`}
-              alt={position === index ? `${tab.t} — AXÉLIA` : ''}
-              aria-hidden={position !== index}
-              width={1440}
-              height={900}
-              sizes="(max-width: 1000px) 100vw, 1000px"
-              priority={position === 0}
-              className={position === index ? 'is-active' : undefined}
+        <div className={playing ? 'reel-stage is-playing' : 'reel-stage'}>
+          <video
+            ref={videoRef}
+            src={src}
+            poster={poster}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label={labels.label}
+            onClick={togglePlay}
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
+            onTimeUpdate={(event) => setTime(event.currentTarget.currentTime)}
+            onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+          />
+          <button type="button" className="video-big-play" onClick={togglePlay} aria-label={labels.play} tabIndex={playing ? -1 : 0}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5.5v13l11-6.5z" />
+            </svg>
+          </button>
+          <div className="video-controls">
+            <button type="button" onClick={togglePlay} aria-label={playing ? labels.pause : labels.play}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                {playing ? <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /> : <path d="M8 5.5v13l11-6.5z" />}
+              </svg>
+            </button>
+            <input
+              type="range"
+              min={0}
+              max={duration || 0}
+              step={0.1}
+              value={time}
+              onChange={seek}
+              aria-label={labels.seek}
+              style={{ '--progress': `${progress}%` } as CSSProperties}
             />
-          ))}
+            <span className="video-time">
+              {formatTime(time)} / {formatTime(duration)}
+            </span>
+            <button type="button" onClick={toggleSound} aria-label={muted ? labels.soundOn : labels.soundOff} className={muted ? 'video-sound is-muted' : 'video-sound'}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" />
+                {muted ? <path d="M15.5 9.5l5 5m0-5l-5 5" className="stroke" /> : <path d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" className="stroke" />}
+              </svg>
+              <span>{muted ? labels.soundOn : labels.soundOff}</span>
+            </button>
+            <button type="button" onClick={fullscreen} aria-label={labels.fullscreen}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" className="stroke" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
