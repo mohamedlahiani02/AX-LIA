@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 function Home({ locale, dict }: ViewProps) {
-  const { hero, reel, universe, cta, demo } = dict;
+  const { hero, reel, universe, approach, cta, demo } = dict;
   const marquee = [...dict.marquee, ...dict.marquee];
   return (
     <>
@@ -100,6 +100,25 @@ function Home({ locale, dict }: ViewProps) {
               </PointerZone>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section" id="approach">
+        <div className="wrap">
+          <h2>{approach.title}</h2>
+          <p className="lead">{approach.sub}</p>
+          <ol className="path">
+            {approach.steps.map((step, index) => (
+              <li key={step.t} className="path-step">
+                <span className="path-num">{String(index + 1).padStart(2, '0')}</span>
+                <h3>{step.t}</h3>
+                <p>{step.d}</p>
+              </li>
+            ))}
+          </ol>
+          <a href="#demo" className="btn path-cta">
+            {approach.cta}
+          </a>
         </div>
       </section>
 

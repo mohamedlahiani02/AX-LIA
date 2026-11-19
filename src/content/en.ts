@@ -73,6 +73,17 @@ export const en: Dict = {
     sub: 'Hover over a brick for a glimpse. We show you the rest.',
     bricks,
   },
+  approach: {
+    title: 'No packs. Your platform.',
+    sub: 'Every establishment has its own rules. We understand them before we price anything.',
+    steps: [
+      { t: 'We listen', d: 'A first conversation with management: your activities, your priorities, what costs you time.' },
+      { t: 'We come on site', d: 'Our consultants watch the front desk, payments, attendance, scheduling. The field, not theory.' },
+      { t: 'We map your rules', d: 'Prices, schedules, pay, approvals, roles: everything is described and validated with you.' },
+      { t: 'We come back with your offer', d: 'A tailored proposal: set-up, operation, and only what you actually need.' },
+    ],
+    cta: 'Talk to a consultant',
+  },
   cta: { title: 'Curious?', sub: 'Thirty minutes, on your real cases. We show you, you decide.' },
   demo: {
     fields: { name: 'Name', establishment: 'Establishment', email: 'Email', phone: 'Phone', message: 'Message or question (optional)' },
